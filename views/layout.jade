@@ -1,0 +1,93 @@
+doctype html
+html
+  head
+    title= title
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css", rel="stylesheet")
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css")
+    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js", integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js", integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1", crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js", integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM", crossorigin="anonymous")
+    link(href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900", rel="stylesheet")
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    nav.navbar.navbar-expand-sm.topnav
+      a.navbar-brand(href='#')
+        img(src='https://personal.utdallas.edu/~cxc210017/aloha.png', width='150', height='150', alt='')
+      | &#x9;&#x9;
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      | &#x9;&#x9;
+      #navbarNavAltMarkup.collapse.navbar-collapse
+        .navbar-nav
+          a.nav-item.nav-link(href='#') Become a Host
+          | &#x9;&#x9;&#x9;
+          a.nav-item.nav-link(href='#') Help
+          | &#x9;&#x9;&#x9;
+          a.nav-item.nav-link(href='/register') Sign Up
+          | &#x9;&#x9;&#x9;
+          a.nav-item.nav-link(href='/login') Login
+      | &#x9;&#x9;
+      #search_bar.col-sm-3.col-md-3.pull-right
+    |     
+    | &#x9;&#x9;
+    | &#x9;&#x9;
+    .wrapper.d-flex.flex-row
+      nav#sidebar
+        .custom-menu
+          button#sidebarCollapse.btn.btn-primary(type='button')
+            i.fa.fa-bars
+        | &#x9;&#x9;&#x9;&#x9;
+        | &#x9;&#x9;&#x9;&#x9;
+        .p-4.pt-5
+          ul.list-unstyled.components.mb-5
+            li
+              a(href='#') Home
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='#') About
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='#') Special Offers
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a.dropdown-toggle(href='#pageSubmenu', data-toggle='collapse', aria-expanded='false') Luxury Rooms
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              ul#pageSubmenu.collapse.list-unstyled
+                li
+                  a(href='#') Page 1
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='#') Page 2
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='#') Page 3
+      // Page Content
+      block content
+    footer.bg-light.text-center.text-lg-start
+      .text-center.p-2(style='background-color: rgba(0, 0, 0, 0.1);')
+        | &copy; 2022 Aloha BnB, Inc.
+        button.btn
+          i.bi.bi-facebook
+        | &#x9;&#x9;&#x9;&#x9;
+        button.btn
+          i.bi.bi-twitter
+        | &#x9;&#x9;&#x9;&#x9;
+        button.btn
+          i.bi.bi-google
+    |         
+    script.
+      (function($) {
+      "use strict";
+      var fullHeight = function() {
+      $('.js-fullheight').css('height', $(window).height());
+      $(window).resize(function(){
+      $('.js-fullheight').css('height', $(window).height());
+      });
+      };
+      fullHeight();
+      $('#sidebarCollapse').on('click', function () {
+      $('#sidebar').toggleClass('active');
+      });
+      })(jQuery);

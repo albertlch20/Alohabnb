@@ -1,0 +1,48 @@
+extends layout
+block content
+  #content.p-4.p-md-5.pt-5
+    #container.container
+    | &#x9;&#x9;&#x9;&#x9;
+    #demo.carousel.slide.mx-auto.w-75(data-bs-ride='carousel')
+      // Indicators/dots
+      .carousel-indicators
+        button.active(type='button', data-bs-target='#demo', data-bs-slide-to='0')
+        | &#x9;&#x9;&#x9;&#x9;&#x9;  
+        button(type='button', data-bs-target='#demo', data-bs-slide-to='1')
+        | &#x9;&#x9;&#x9;&#x9;&#x9;  
+        button(type='button', data-bs-target='#demo', data-bs-slide-to='2')
+      // The slideshow/carousel
+      .carousel-inner
+        .carousel-item.active
+          img.d-block(src='https://i.ibb.co/bJm3kb4/dallas.jpg', alt='Dallas', style='width:100%')
+          | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+          .carousel-caption.d-none.d-md-block
+            h5(style='font-size: 2vw;') Dallas
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            p(style='font-size: 1vw;')
+              | The Dallas Arts District consists of 19 blocks of museums, venues, and galleries.
+        | &#x9;&#x9;&#x9;&#x9;&#x9;  
+        .carousel-item
+          img.d-block(src='https://i.ibb.co/SQPYGwc/austin.jpg', alt='Austin', style='width:100%')
+          | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+          .carousel-caption.d-none.d-md-block
+            h5(style='font-size: 2vw;') Austin
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            p(style='font-size: 1vw;')
+              | Austin has been known as the &quot;City of the Violet Crown&quot;, because of the colourful glow of light across the hills just after sunset.
+        | &#x9;&#x9;&#x9;&#x9;&#x9;  
+        .carousel-item
+          img.d-block(src='https://i.ibb.co/swWjfWH/houston.jpg', alt='Houston', style='width:100%')
+          | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+          .carousel-caption.d-none.d-md-block
+            h5(style='font-size: 2vw;') Houston
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            p(style='font-size: 1vw;')
+              | You can easily find all kinds of cuisines in the city of Houston, whether it is Chinese, Indian, Lebanese, Mexican, or Cuban.
+      // Left and right controls/icons
+      button.carousel-control-prev(type='button', data-bs-target='#demo', data-bs-slide='prev')
+        span.carousel-control-prev-icon
+      | &#x9;&#x9;&#x9;&#x9;&#x9;
+      button.carousel-control-next(type='button', data-bs-target='#demo', data-bs-slide='next')
+        span.carousel-control-next-icon
+| &#x9;&#x9;
