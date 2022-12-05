@@ -2,10 +2,10 @@
 ## Progress
 - Moved the css file and html template into Express framework (views/layout.jade)
 - Added index, login, and register pages
+- Check and hash password
 
 ## TODO
 ### Login & Register
-- Check and hash password
 - Keep signed in until logged out
 - Check if we should use uid or _id
 - Create user home page
