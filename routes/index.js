@@ -3,6 +3,7 @@ var router = express.Router();
 
 const jwt = require('jsonwebtoken');
 const auth = require('./middleware/auth');
+const bcrypt = require('bcryptjs')
 
 var monk = require('monk');
 const { response } = require('express');
@@ -12,7 +13,6 @@ var collection = db.get('users');
 /* GET home page. */
 router.get('/', function(req, res) {
 	res.render('index', { title: 'Express'} );
-
 });
 
 router.get('/login', function(req, res) {
@@ -49,15 +49,21 @@ router.post('/register', function(req, res) {
 				res.json({ error : "User already exists. Please login!"} );
 
 			}
+			else if (!email.match(/^\S+@[0-9a-zA-Z]+.[0-9a-zA-Z]+$/)){
+				res.json({ error : "Please enter a valid email!"} );
+			}
+			else if (password.length < 6){
+				res.json({ error : "Please enter a stronger password!"} );
+			}
 			else{
-
+				var hash = bcrypt.hashSync(password, 10);
 				let newUser = {
 					uid: 6,
 					username: username,
 					is_host: false,
 					owned_properties: [],
 					favorite_list: [],
-					password: password,
+					password: hash,
 					email: email
 				}
 				
@@ -103,10 +109,11 @@ router.post('/login', function(req, res) {
 
 			}
 			else{
-				if (user.password === password ){
+				if (bcrypt.compareSync(password, user.password) ){
 					var token = jwt.sign({ user_id: user._id, username}, 'secretkey');
 					user.token = token;
 					res.json(user);
+					//res.redirect('/welcome')
 
 				}
 				else{
