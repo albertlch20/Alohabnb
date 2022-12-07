@@ -26,8 +26,13 @@ router.get('/register', function(req, res) {
 });
 
 //protected route
-router.get('/welcome', auth, function(req, res) {
-	res.json({ message: "Welcome!!" } );
+// router.get('/welcome', auth, function(req, res) {
+// 	res.json({ message: "Welcome!!" } );
+
+// });
+
+router.get('/welcome', function(req, res) {
+	res.render('welcome');
 
 });
 
@@ -113,7 +118,6 @@ router.post('/login', function(req, res) {
 					var token = jwt.sign({ user_id: user._id, username}, 'secretkey');
 					user.token = token;
 					res.json(user);
-					//res.redirect('/welcome')
 
 				}
 				else{

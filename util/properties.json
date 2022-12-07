@@ -1,0 +1,210 @@
+[{
+  "_id": {
+    "$oid": "637722903ab060f06d03b17a"
+  },
+  "pid": 1,
+  "title": "Room in Kemp",
+  "location": "Kemp, Texas, United States",
+  "description": "Best Luxury house ever",
+  "nightly_fee": 300,
+  "cleaning_fee": 100,
+  "service_fee": 100,
+  "amenities": [
+    "Air Conditioner",
+    "TV",
+    "Free parking"
+  ],
+  "images": [
+    "001.jpg",
+    "002.jpg",
+    "003.jpg"
+  ],
+  "bedrooms": 2,
+  "reviews": [
+    {
+      "uid": 1,
+      "rating": 5,
+      "text": "good",
+      "date": "2022-11-10"
+    },
+    {
+      "uid": 2,
+      "rating": 4,
+      "text": "Above average",
+      "date": "2022-11-17"
+    }
+  ],
+  "owner": 4,
+  "type": "House",
+  "is_available": true
+},{
+  "_id": {
+    "$oid": "637722903ab060f06d03b17b"
+  },
+  "pid": 2,
+  "title": "Vacation house in Austin",
+  "location": "Austin, Texas, United States",
+  "description": "Big vacation house for family",
+  "nightly_fee": 800,
+  "cleaning_fee": 200,
+  "service_fee": 100,
+  "amenities": [
+    "Air Conditioner",
+    "TV",
+    "Free parking",
+    "Washer",
+    "Swimming Pool"
+  ],
+  "images": [
+    "004.jpg",
+    "005.jpg",
+    "006.jpg"
+  ],
+  "bedrooms": 4,
+  "reviews": [
+    {
+      "uid": 2,
+      "rating": 5,
+      "text": "Clean and big!!",
+      "date": "2022-10-10"
+    }
+  ],
+  "owner": 4,
+  "type": "House",
+  "is_available": true
+},{
+  "_id": {
+    "$oid": "637722903ab060f06d03b17c"
+  },
+  "pid": 3,
+  "title": "Tiny home hosted by Michael",
+  "location": "San Antonio, Texas, United States",
+  "description": "During your stay Through our texting service, guests can let us know if they need anything from 8 am - 8 pm.",
+  "nightly_fee": 700,
+  "cleaning_fee": 100,
+  "service_fee": 100,
+  "amenities": [
+    "Air Conditioner",
+    "TV",
+    "Free parking",
+    "Washer",
+    "Swimming pool",
+    "Fire pit",
+    "Kitchen"
+  ],
+  "images": [
+    "007.jpg",
+    "008.jpg",
+    "009.jpg"
+  ],
+  "bedrooms": 1,
+  "reviews": [
+    {
+      "uid": 2,
+      "rating": 1,
+      "text": "AVOID THIS!!!!!",
+      "date": "2022-10-15"
+    },
+    {
+      "uid": 3,
+      "rating": 5,
+      "text": "Recommended",
+      "date": "2022-11-15"
+    }
+  ],
+  "owner": 4,
+  "type": "House",
+  "is_available": true
+},{
+  "_id": {
+    "$oid": "637722903ab060f06d03b17d"
+  },
+  "pid": 4,
+  "title": "Apartment in Plano",
+  "location": "Plano, Texas, United States",
+  "description": "Cozy Apartment",
+  "nightly_fee": 120,
+  "cleaning_fee": 80,
+  "service_fee": 500,
+  "amenities": [
+    "Air Conditioner",
+    "TV"
+  ],
+  "images": [
+    "010.jpg",
+    "011.jpg",
+    "012.jpg"
+  ],
+  "bedrooms": 1,
+  "reviews": [],
+  "owner": 5,
+  "type": "Apartment",
+  "is_available": true
+},{
+  "_id": {
+    "$oid": "637722903ab060f06d03b17e"
+  },
+  "pid": 5,
+  "title": "Room in Dallas",
+  "location": "Dallas, Texas, United States",
+  "description": "Located in Downtown Dallas, near Reunion Tower",
+  "nightly_fee": 100,
+  "cleaning_fee": 20,
+  "service_fee": 30,
+  "amenities": [
+    "Air Conditioner",
+    "Swimming Pool",
+    "Video Games"
+  ],
+  "images": [
+    "013.jpg",
+    "014.jpg",
+    "015.jpg"
+  ],
+  "bedrooms": 1,
+  "reviews": [
+    {
+      "uid": 5,
+      "rating": 5,
+      "text": "good",
+      "date": "2022-11-10"
+    }
+  ],
+  "owner": 5,
+  "type": "Apartment",
+  "is_available": false
+},{
+  "_id": {
+    "$oid": "637722903ab060f06d03b17f"
+  },
+  "pid": 6,
+  "title": "House near Yellowstone National Park",
+  "location": "West Yellowstone, Montana, United States",
+  "description": "Big house, 5 mins to the west entrance of Yellowstone National Park",
+  "nightly_fee": 500,
+  "cleaning_fee": 50,
+  "service_fee": 100,
+  "amenities": [
+    "Free parking",
+    "Hot tub",
+    "Washing machine",
+    "Heater"
+  ],
+  "images": [
+    "016.jpg",
+    "017.jpg",
+    "018.jpg"
+  ],
+  "bedrooms": 4,
+  "reviews": [
+    {
+      "uid": 5,
+      "rating": 5,
+      "text": "Good Good Good",
+      "date": "2022-11-13"
+    }
+  ],
+  "owner": 5,
+  "type": "House",
+  "is_available": true
+}]

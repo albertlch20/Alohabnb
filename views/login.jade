@@ -3,12 +3,46 @@ extends layout
 block content
     div.p-5
         h1 Login
-        form(action='/login', method='post')
+        form
             #form-group
                 label Username: 
-                input.form-control(name='username', type='text')
+                input#username.form-control(name='username', type='text')
             #form-group
                 label Password: 
-                input.form-control(name='password', type='text')
+                input#password.form-control(name='password', type='text')
             br
-            input.btn.btn-primary(type='submit', value='Submit')
+            input#submit.btn.btn-primary(value='Submit')
+    script. 
+        document.getElementById('submit').onclick = function(){
+            fetch('http://localhost:3000/login', {
+                method: "POST",
+                headers : { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify( { 
+
+                    "username": document.getElementById('username').value,
+                    "password": document.getElementById('password').value
+
+                } )
+            })
+            .then( res => res.json() )
+            .then( (data) => { 
+
+                if (data.error)
+                    alert(data.error);
+                    
+                else{
+                    let inMemoryToken = data.token;
+                    console.log(inMemoryToken);
+
+                    localStorage.setItem('user', JSON.stringify(data));
+                    window.location.href = "/welcome";
+                }
+                
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+        }

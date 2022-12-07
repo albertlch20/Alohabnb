@@ -1,0 +1,76 @@
+[{
+  "_id": {
+    "$oid": "637722ba3ab060f06d03b184"
+  },
+  "uid": 1,
+  "username": "abc123",
+  "password": "$2a$10$TxdZRKBOPTMsE2kN59OkveS3r1ESAC7xhF2LBV/4/LQi13siVCRDi",
+  "is_host": false,
+  "owned_properties": [],
+  "favorite_list": [
+    1
+  ],
+  "email": "abc123@gmail.com"
+},{
+  "_id": {
+    "$oid": "637722ba3ab060f06d03b185"
+  },
+  "uid": 2,
+  "username": "zxc0987",
+  "password": "2a$10$TxdZRKBOPTMsE2kN59OkveS3r1ESAC7xhF2LBV/4/LQi13siVCRDi",
+  "is_host": false,
+  "owned_properties": [],
+  "favorite_list": [
+    1,
+    2
+  ],
+  "email": "zxc0987@gmail.com"
+},{
+  "_id": {
+    "$oid": "637722ba3ab060f06d03b186"
+  },
+  "uid": 3,
+  "username": "123yy321",
+  "password": "2a$10$TxdZRKBOPTMsE2kN59OkveS3r1ESAC7xhF2LBV/4/LQi13siVCRDi",
+  "is_host": false,
+  "owned_properties": [],
+  "favorite_list": [
+    3,
+    6
+  ],
+  "email": "123321@gmail.com"
+},{
+  "_id": {
+    "$oid": "637722ba3ab060f06d03b187"
+  },
+  "uid": 4,
+  "username": "aa21287",
+  "password": "2a$10$TxdZRKBOPTMsE2kN59OkveS3r1ESAC7xhF2LBV/4/LQi13siVCRDi",
+  "is_host": true,
+  "owned_properties": [
+    1,
+    2,
+    3
+  ],
+  "favorite_list": [],
+  "email": "aa21287@gmail.com"
+},{
+  "_id": {
+    "$oid": "637722ba3ab060f06d03b188"
+  },
+  "uid": 5,
+  "username": "besthostever",
+  "password": "2a$10$TxdZRKBOPTMsE2kN59OkveS3r1ESAC7xhF2LBV/4/LQi13siVCRDi",
+  "is_host": true,
+  "owned_properties": [
+    4,
+    5,
+    6
+  ],
+  "favorite_list": [
+    4,
+    5,
+    6
+  ],
+  "email": "bhe@gmail.com"
+}]

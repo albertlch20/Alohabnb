@@ -1,4 +1,4 @@
-extends layout
+extends layout2
 block content
   #content.p-4.p-md-5.pt-5
     #container.container
@@ -46,3 +46,12 @@ block content
       button.carousel-control-next(type='button', data-bs-target='#demo', data-bs-slide='next')
         span.carousel-control-next-icon
 | &#x9;&#x9;
+
+script. 
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user)
+    document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
+  else{
+    window.location.href = "/login";
+    alert('Please log in first!');
+  }

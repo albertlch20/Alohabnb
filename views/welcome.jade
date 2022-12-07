@@ -1,0 +1,14 @@
+extends layout2
+
+block content
+    div.p-5
+        h1#hello Hello
+
+    script. 
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user)
+        document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
+        else{
+            window.location.href = "/login";
+            alert('Please log in first!')
+        }
