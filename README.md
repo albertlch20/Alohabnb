@@ -6,7 +6,7 @@
 - Keep signed in until logged out
 - Create user home page
 - Check if we should use uid or _id
-- Added json files for mongodb
+- Added json files for mongodb (./util)
 ## TODO
 ### Login & Register
 - Remove uid, pid, rid, use _id instead
