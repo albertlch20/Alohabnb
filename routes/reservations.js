@@ -73,7 +73,9 @@ router.post('/', function(req, res) {
 		.then(function(){
 			var today = new Date();
 			
-			if(checkinDate === undefined || checkoutDate === undefined || stringToDate(checkinDate, 'yyyy-mm-dd', '-') <= today
+			if(uid === undefined || uid === '') {
+				res.render('newReservation', {"results": "Please log in first"});
+			} else if(checkinDate === undefined || checkoutDate === undefined || stringToDate(checkinDate, 'yyyy-mm-dd', '-') <= today
 				|| stringToDate(checkinDate, 'yyyy-mm-dd', '-') >= stringToDate(checkoutDate, 'yyyy-mm-dd', '-')
 				|| checkinDate === "" || checkoutDate === "") {
 				res.render('newReservation', {"results": "Wrong date input" });

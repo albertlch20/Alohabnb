@@ -25,38 +25,20 @@ router.get('/register', function(req, res) {
 
 });
 
-router.get('/reservationsList', function(req, res) {
+router.get('/reservationsList/:uid', function(req, res) {
 	var collection = db.get('reservations');
-    var rid = req.query.rid;
-    var userid = req.query.userid;
+    var uid = req.params.uid;
 	
-    if (rid === undefined && userid === undefined){
+    if (uid !== undefined){
 		const results_from_mongo = [];
 
-		collection.find({}, {sort: {start_date: 1}})
+		collection.find({uid : Number(uid)}, {sort: {start_date: 1}})
 			.each(function(doc){
 				results_from_mongo.push(doc);
 			})
 			.then(function(){
 				res.render('reservationsList', {"results": results_from_mongo });
 			});
-    } else if (userid === undefined){
-        collection.findOne({ rid: Number(rid) }, function(err, reservation){
-            if (err) throw err;
-			results_from_mongo = reservations;
-        });
-    }
-    else if (rid === undefined){
-        collection.find({ uid: Number(userid) }, function(err, reservation){
-            if (err) throw err;
-			results_from_mongo = reservations;
-        });
-    }
-    else{
-        collection.findOne({ rid: Number(rid), uid: Number(userid) }, function(err, reservation){
-            if (err) throw err;
-			results_from_mongo = reservations;
-        });
     }
 });
 

@@ -1,4 +1,4 @@
-extends layout
+extends layout2
 
 block content
 	.container
@@ -10,7 +10,7 @@ block content
 				.h5 CHECKOUT
 				input#checkout.form-control.input-sm(title='Select check-out date' name='checkoutDate' type='text' size='30' placeholder='yyyy-mm-dd')
 				br
-				input(name='uid' value='2' type='hidden')
+				input#uid(name='uid' value='9' type='hidden')
 				input(name='pid' value='3' type='hidden')
 				input.btn.btn-primary.btn-lg.btn-block(type='submit', value='RESERVE')
 				br
@@ -19,6 +19,8 @@ block content
 			script.
 				$(document).ready(function(){
 					var showRes = document.getElementById("showRes");
+					const user = JSON.parse(localStorage.getItem('user'));
+					
 					if('#{results}' !== undefined) {
 						showRes.textContent='#{results}';
 						showRes.classList.remove('hidden');
@@ -40,4 +42,7 @@ block content
 					
 					//$('#checkout').data('datepicker').hide = function () {};
 					//$('#checkout').datepicker('show');
+					
+					var uid = document.getElementById("uid");
+					uid.value = user.uid;
 				})
