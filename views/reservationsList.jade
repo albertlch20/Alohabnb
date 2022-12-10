@@ -1,0 +1,45 @@
+extends layout
+
+block content
+	.container.p-5
+		h1 Reservations
+		table.table
+			thead
+				tr
+				th Reservation ID
+				th Property ID
+				th Reservation Start Date
+				th Reservation End Date
+				th Cancel Reservation
+			tbody
+				each result in results
+					tr
+						td= result.rid
+						td= result.pid
+						td= result.start_date
+						td= result.end_date
+						td
+							button(value=result.start_date, class='hidden', type='submit', onclick='delReservation("#{result.rid}")') Cancel
+							script.						
+								function delReservation(rid){
+									var val = confirm ("Cancel this reservation?");
+									if (val==true){
+										fetch('/reservations/' + rid, {method: 'DELETE'});
+										location.reload();
+									}
+								};
+				script.
+					Date.prototype.addDays = function(days) {
+						var date = new Date(this.valueOf());
+						date.setDate(date.getDate() + days);
+						return date;
+					}
+					
+					var twoDaysAfter = new Date().addDays(2);
+					var buttons = document.getElementsByTagName("button");
+					for (i = 0; i < buttons.length; ++i) {
+						var resDate = new Date(buttons[i].value);
+						if (resDate > twoDaysAfter) {
+							buttons[i].classList.remove('hidden');
+						}
+					}

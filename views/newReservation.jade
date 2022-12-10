@@ -1,0 +1,43 @@
+extends layout
+
+block content
+	.container
+		div.p-5
+			form(action='/reservations' method='post')
+				.h5 CHECK-IN
+				input#checkin.form-control.input-sm.datepicker(title='Select check-in date' name='checkinDate' type='text' size='30' placeholder='yyyy-mm-dd')
+				br
+				.h5 CHECKOUT
+				input#checkout.form-control.input-sm(title='Select check-out date' name='checkoutDate' type='text' size='30' placeholder='yyyy-mm-dd')
+				br
+				input(name='uid' value='2' type='hidden')
+				input(name='pid' value='3' type='hidden')
+				input.btn.btn-primary.btn-lg.btn-block(type='submit', value='RESERVE')
+				br
+				p#showRes.hidden Success
+				
+			script.
+				$(document).ready(function(){
+					var showRes = document.getElementById("showRes");
+					if('#{results}' !== undefined) {
+						showRes.textContent='#{results}';
+						showRes.classList.remove('hidden');
+					}
+				
+					$('#checkin').datepicker({
+							format: 'yyyy-mm-dd',
+							todayHighlight: true,
+							autoclose: true,
+						})
+					$('#checkout').datepicker({
+							format: 'yyyy-mm-dd',
+							todayHighlight: true,
+							autoclose: true,
+						})
+						
+					//$('#checkin').data('datepicker').hide = function () {};
+					//$('#checkin').datepicker('show');
+					
+					//$('#checkout').data('datepicker').hide = function () {};
+					//$('#checkout').datepicker('show');
+				})
