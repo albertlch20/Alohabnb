@@ -15,6 +15,10 @@ router.get('/', function(req, res) {
 	res.render('index', { title: 'Express'} );
 });
 
+router.get('/logged', function(req, res) {
+	res.render('index2', { title: 'Express'} );
+});
+
 router.get('/login', function(req, res) {
 	res.render('login');
 

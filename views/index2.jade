@@ -1,4 +1,4 @@
-extends layout
+extends layout2
 block content
   #content.p-4.p-md-5.pt-5
     #container.container
@@ -50,8 +50,6 @@ block content
     script.
       const user = JSON.parse(localStorage.getItem('user'));
       if (user) {
-        console.log('Enter logged page');
-        window.location.href = ('/logged');
       } else{
         console.log('Enter not logged page');
         window.location.href = "/login";
