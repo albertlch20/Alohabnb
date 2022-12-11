@@ -32,7 +32,18 @@ html
           | &#x9;&#x9;&#x9;
           a#logout.nav-item.nav-link(href='#') Log out
       | &#x9;&#x9;
-      #search_bar.col-sm-3.col-md-3.pull-right
+      div(id='search_bar' class='col-sm-3 col-md-3 pull-right')
+        input(id='search' type='text' placeholder='Search...' onkeydown='searchProp(event)')
+        script.
+          function searchProp(e) {
+            if (e.keyCode == 13) {
+              var input = document.getElementById('search');
+              if(input !== undefined || input != '') {
+                var url = 'http://localhost:3000/search2/' + input.value;
+                window.location.href = url;
+              }
+            }
+          }
     |     
     | &#x9;&#x9;
     | &#x9;&#x9;
@@ -50,9 +61,6 @@ html
             | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
             li
               a#resv(href='/reservationsList') Reservations
-            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-            li
-              a(href='/newReservation') New Reservation
             | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
             li
               a(href='#') About

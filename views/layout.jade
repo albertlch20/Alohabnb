@@ -31,7 +31,18 @@ html
           | &#x9;&#x9;&#x9;
           a.nav-item.nav-link(href='/login') Login
       | &#x9;&#x9;
-      #search_bar.col-sm-3.col-md-3.pull-right
+      div(id='search_bar' class='col-sm-3 col-md-3 pull-right')
+        input(id='search' type='text' placeholder='Search...' onkeydown='searchProp(event)')
+        script.
+          function searchProp(e) {
+            if (e.id!='search' || e.keyCode == 13) {
+              var input = document.getElementById('search');
+              if(input !== undefined || input != '') {
+                var url = 'http://localhost:3000/search2/' + input.value;
+                window.location.href = url;
+              }
+            }
+          }
     |     
     | &#x9;&#x9;
     | &#x9;&#x9;

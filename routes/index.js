@@ -12,11 +12,151 @@ var collection = db.get('users');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	res.render('index', { title: 'Express'} );
+	var collection = db.get('properties');
+	
+	const results_from_mongo = [];
+
+	collection.find({})
+		.each(function(doc){
+			results_from_mongo.push(doc);
+		})
+		.then(function(){
+			res.render('index', {"results": results_from_mongo });
+		});
+});
+
+router.get('/search', function(req, res) {
+	var collection = db.get('properties');
+	
+	const results_from_mongo = [];
+
+	collection.find({})
+		.each(function(doc){
+			results_from_mongo.push(doc);
+		})
+		.then(function(){
+			res.render('index', {"results": results_from_mongo });
+		});
+});
+
+router.get('/search2', function(req, res) {
+	var collection = db.get('properties');
+	
+	const results_from_mongo = [];
+
+	collection.find({})
+		.each(function(doc){
+			results_from_mongo.push(doc);
+		})
+		.then(function(){
+			res.render('index2', {"results": results_from_mongo });
+		});
+});
+
+router.get('/search/:in', function(req, res) {
+	var input = req.params.in;
+	var i=0;
+	
+	if(input !== undefined) {
+		var collection = db.get('properties');
+		
+		const results_from_mongo = [];
+
+		collection.find({})
+			.each(function(doc){
+				results_from_mongo.push(doc);
+			})
+			.then(function(){
+				if(input !== undefined || input != '') {
+					while(i<results_from_mongo.length) {
+						if (
+							(results_from_mongo[i].title.toLowerCase().indexOf(
+								input.toLowerCase()
+							) == -1) &&
+							(results_from_mongo[i].location.toLowerCase().indexOf(
+								input.toLowerCase()
+							) == -1) &&
+							(results_from_mongo[i].type.toLowerCase().indexOf(
+								input.toLowerCase()
+							) == -1)
+						) {
+							results_from_mongo.splice(i, 1);
+						} else {
+							++i;
+						}
+					}
+				}
+			})
+			.then(function(){
+				res.render('index', {"results": results_from_mongo });
+			});
+	}
+});
+
+router.get('/search2/:in', function(req, res) {
+	var input = req.params.in;
+	var i=0;
+	
+	if(input !== undefined) {
+		var collection = db.get('properties');
+		
+		const results_from_mongo = [];
+
+		collection.find({})
+			.each(function(doc){
+				results_from_mongo.push(doc);
+			})
+			.then(function(){
+				if(input !== undefined || input != '') {
+					while(i<results_from_mongo.length) {
+						if (
+							(results_from_mongo[i].title.toLowerCase().indexOf(
+								input.toLowerCase()
+							) == -1) &&
+							(results_from_mongo[i].location.toLowerCase().indexOf(
+								input.toLowerCase()
+							) == -1) &&
+							(results_from_mongo[i].type.toLowerCase().indexOf(
+								input.toLowerCase()
+							) == -1)
+						) {
+							results_from_mongo.splice(i, 1);
+						} else {
+							++i;
+						}
+					}
+				}
+			})
+			.then(function(){
+				res.render('index2', {"results": results_from_mongo });
+			});
+	}
+});
+
+router.get('/details/:pid', function(req, res) {
+	var pid = req.params.pid;
+	var collection = db.get('properties');
+	
+	const results_from_mongo = [];
+
+	collection.findOne({ pid: Number(pid) }, function(err, property){
+		if (err) throw err;
+		res.render('detail', property);
+	});
 });
 
 router.get('/logged', function(req, res) {
-	res.render('index2', { title: 'Express'} );
+	var collection = db.get('properties');
+	
+	const results_from_mongo = [];
+
+	collection.find({})
+		.each(function(doc){
+			results_from_mongo.push(doc);
+		})
+		.then(function(){
+			res.render('index2', {"results": results_from_mongo });
+		});
 });
 
 router.get('/login', function(req, res) {
@@ -28,6 +168,21 @@ router.get('/register', function(req, res) {
 	res.render('register');
 
 });
+
+/*router.get('/search', function(req, res) {
+	var collection = db.get('properties');
+	
+	const results_from_mongo = [];
+
+	collection.find({pid:1})
+		.each(function(doc){
+			results_from_mongo.push(doc);
+		})
+		.then(function(){
+			res.render('index', {"results": results_from_mongo });
+			window.location.href = "http://localhost:3000/";
+		});
+});*/
 
 router.get('/reservationsList/:uid', function(req, res) {
 	var collection = db.get('reservations');
@@ -46,8 +201,12 @@ router.get('/reservationsList/:uid', function(req, res) {
     }
 });
 
-router.get('/newReservation', function(req, res) {
-	res.render('newReservation');
+router.get('/newReservation/:pid', function(req, res) {
+	var pid = req.params.pid;
+	
+	if (pid !== undefined){
+		res.render('newReservation', {"pid" : req.params.pid});
+	}
 });
 
 //protected route
@@ -158,7 +317,46 @@ router.post('/login', function(req, res) {
 
 });
 
+// get properties
+router.get('/properties2', function(req, res) {
+	var collection = db.get('properties');
+	if (req.query.pid === undefined){
+		collection.find({}, function(err, properties){
+			if (err) throw err;
+			res.json(properties);
+		});
+	}
+	else{
+		collection.findOne({ pid: Number(req.query.pid) }, function(err, property){
+			if (err) throw err;
+			res.json(property);
+		});
+	}
+});
 
-
+// get login user
+router.get('/login_user', function(req, res) {
+	res.json({
+		uid: 2,
+		favorite_list: [1, 2]
+	});
+});
+//get test
+// get properties
+router.get('/test', function(req, res) {
+	var collection = db.get('test');
+	if (req.query.pid === undefined){
+		collection.find({}, function(err, test){
+			if (err) throw err;
+			res.json(test);
+		});
+	}
+	else{
+		collection.findOne({ pid: Number(req.query.pid) }, function(err, test){
+			if (err) throw err;
+			res.json(test);
+		});
+	}
+});
 
 module.exports = router;
