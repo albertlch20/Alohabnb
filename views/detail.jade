@@ -39,17 +39,19 @@ block content
                 tr
                   th(scope='row') Amenities: 
                   td #{amenities}
-            div(class='rating')
-              input#5(type='radio' name='rating' value='5')
-              label(htmlfor='5') ☆
-              input#4(type='radio' name='rating' value='4')
-              label(htmlfor='4') ☆
-              input#3(type='radio' name='rating' value='3')
-              label(htmlfor='3') ☆
-              input#2(type='radio' name='rating' value='2')
-              label(htmlfor='2') ☆
-              input#1(type='radio' name='rating' value='1')
-              label(htmlfor='1') ☆
+            .col-md-12
+              .stars
+                form(action='')
+                  input#star-5.star.star-5(type='radio' name='star')
+                  label.star.star-5(for='star-5')
+                  input#star-4.star.star-4(type='radio' name='star')
+                  label.star.star-4(for='star-4')
+                  input#star-3.star.star-3(type='radio' name='star')
+                  label.star.star-3(for='star-3')
+                  input#star-2.star.star-2(type='radio' name='star')
+                  label.star.star-2(for='star-2')
+                  input#star-1.star.star-1(type='radio' name='star')
+                  label.star.star-1(for='star-1')
             div(class='form-group')
               label(htmlfor='exampleFormControlTextarea1') Add Comment
               textarea#exampleFormControlTextarea1(class='form-control' rows='3')
