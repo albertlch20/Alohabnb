@@ -15,6 +15,10 @@ router.get('/', function(req, res) {
 	res.render('index', { title: 'Express'} );
 });
 
+router.get('/logged', function(req, res) {
+	res.render('index2', { title: 'Express'} );
+});
+
 router.get('/login', function(req, res) {
 	res.render('login');
 
@@ -23,6 +27,27 @@ router.get('/login', function(req, res) {
 router.get('/register', function(req, res) {
 	res.render('register');
 
+});
+
+router.get('/reservationsList/:uid', function(req, res) {
+	var collection = db.get('reservations');
+    var uid = req.params.uid;
+	
+    if (uid !== undefined){
+		const results_from_mongo = [];
+
+		collection.find({uid : Number(uid)}, {sort: {start_date: 1}})
+			.each(function(doc){
+				results_from_mongo.push(doc);
+			})
+			.then(function(){
+				res.render('reservationsList', {"results": results_from_mongo });
+			});
+    }
+});
+
+router.get('/newReservation', function(req, res) {
+	res.render('newReservation');
 });
 
 //protected route
