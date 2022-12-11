@@ -55,9 +55,13 @@ block content
               textarea#exampleFormControlTextarea1(class='form-control' rows='3')
             .input-group
               button.btn.btn-primary.m-2(type='submit' onclick='{returnToMainPage}') Submit
-              button.btn.btn-primary.m-2(type='submit' onclick='{addFavorites(property.id)}') Add to Favorites
+              form(action="/users/favourites" method='POST')
+                input#uid.btn.btn-primary.m-2(name='uid' type='hidden' value='')
+                input#pid.btn.btn-primary.m-2(name='pid' type='hidden' value='#{pid}')
+                input.btn.btn-primary.m-2(type='submit' value='Add to Favourites')
               form(action="/newReservation/#{pid}")
                 input.btn.btn-primary.m-2(type='submit' value='Reserve')
+              p#showRes.hidden Success
             br
             br
             form(action="/")
@@ -67,3 +71,19 @@ block content
             br
             br
             br
+            script.
+              const user = JSON.parse(localStorage.getItem('user'));
+              if(user) {
+                var uid = document.getElementById("uid");
+                uid.value = user.uid;
+              } else {
+                window.location.href = "/login";
+                alert('Please log in first!');
+              }
+              
+              $(document).ready(function() {
+                if('#{updateResult}' !== '') {
+                  showRes.textContent='#{updateResult}';
+                  showRes.classList.remove('hidden');
+                }
+              })

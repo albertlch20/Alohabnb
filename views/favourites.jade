@@ -1,4 +1,4 @@
-extends layout
+extends layout2
 block content
     div(id='content' class='p-4 p-md-5 pt-5')
       div(id='container' class='container')
@@ -24,6 +24,17 @@ block content
                 p(class='card-text') #{property.location}
                 p(class='card-text') #{property.bedrooms}-bedroom
                 p(class='card-text') $#{property.nightly_fee}/night
+
+              button.btn.btn-primary.btn-block(class='button', type='submit', onclick='delFavourites("#{property.pid}")') Delete from list
+              script.
+                function delFavourites(pid){
+                  const user = JSON.parse(localStorage.getItem('user'));
+                  console.log(String(user.id));
+                  var url = 'http://localhost:3000/favourites/' + String(user.uid);
+   
+                  fetch('/users/favourites/' + String(user.uid) + '/' + pid, {method: 'DELETE'});
+                  window.location.href = url;
+                };              
 
         #content.p-4.p-md-5.pt-5
           #container.container
@@ -73,13 +84,6 @@ block content
           | &#x9;&#x9;
         
           script.
-            const user = JSON.parse(localStorage.getItem('user'));
-            if (user) {
-              window.location.href = ('/logged');
-            } else{
-              //window.location.href = "/login";
-              //alert('Please log in first!');
-            }
             function onClickHandlers(e) {
               if(e) {
                 var url = 'http://localhost:3000/details/' + e.id;

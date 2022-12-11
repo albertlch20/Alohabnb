@@ -136,12 +136,30 @@ router.get('/search2/:in', function(req, res) {
 router.get('/details/:pid', function(req, res) {
 	var pid = req.params.pid;
 	var collection = db.get('properties');
-	
 	const results_from_mongo = [];
 
 	collection.findOne({ pid: Number(pid) }, function(err, property){
 		if (err) throw err;
 		res.render('detail', property);
+	});
+});
+
+router.get('/favourites/:uid', function(req, res) {
+	var uid = req.params.uid;
+	var collection = db.get('users');
+	var collection2 = db.get('properties');
+	const results_from_mongo = [];
+	
+	collection.findOne({uid:Number(uid)}, function(err, user){
+		var list=user.favorite_list;
+		
+		collection2.find({'pid':{$in:list}})
+			.each(function(doc){
+				results_from_mongo.push(doc);
+			})
+			.then(function(){
+				res.render('favourites', {"results": results_from_mongo });
+			});
 	});
 });
 
@@ -168,21 +186,6 @@ router.get('/register', function(req, res) {
 	res.render('register');
 
 });
-
-/*router.get('/search', function(req, res) {
-	var collection = db.get('properties');
-	
-	const results_from_mongo = [];
-
-	collection.find({pid:1})
-		.each(function(doc){
-			results_from_mongo.push(doc);
-		})
-		.then(function(){
-			res.render('index', {"results": results_from_mongo });
-			window.location.href = "http://localhost:3000/";
-		});
-});*/
 
 router.get('/reservationsList/:uid', function(req, res) {
 	var collection = db.get('reservations');

@@ -63,6 +63,9 @@ html
               a#resv(href='/reservationsList') Reservations
             | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
             li
+              a#fav(href='/favourites') Favourites
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
               a(href='#') About
             | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
             li
@@ -117,6 +120,8 @@ html
       $(document).ready(function(){
         const user = JSON.parse(localStorage.getItem('user'));
         var resvLink = document.getElementById('resv');
+        var favLink = document.getElementById('fav');
         
         resvLink.href = '/reservationsList/' + user.uid;
+        favLink.href = '/favourites/' + user.uid;
       })
