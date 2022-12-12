@@ -3,7 +3,8 @@ extends layout2
 block content
     div#content.p-5
         h1#hello Hello Host
-        button.btn.btn-secondary.my-3 Add new property 
+        button.btn.btn-secondary.my-3 Add new property
+        form(action="/host/#{pid}")
         table.table 
             thead 
                 tr 

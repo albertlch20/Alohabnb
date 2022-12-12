@@ -27,6 +27,7 @@ router.put('/update/:uid', function(req, res) {
 router.post('/favourites', function(req, res) {
 	var uid = req.body.uid;
 	var pid = req.body.pid;
+	console.log(pid);
   	var collection = db.get('users');
 	var collection2 = db.get('properties');
   
