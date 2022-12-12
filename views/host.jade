@@ -40,14 +40,18 @@ block content
         fetch('/users/' + user.uid, {method: 'GET'})
         .then( res => res.json())
         .then( (data) => {
+            console.log(data)
             if (!data.is_host){
                 if (confirm("Would you like to become a host?")){
                     //- call update user api to change is_host
                     fetch('/users/update/' + user.uid, {method: "PUT", headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify( { "is_host": true } )})
-                    document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
+                    .then(location.reload());
                 }
                 else{
                     window.location.href = "/";
                 }
+            }
+            else{
+                document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
             }
         });
