@@ -86,7 +86,7 @@ block content
             ///
             script.
               const user = JSON.parse(localStorage.getItem('user'));
-              input#pid.btn.btn-primary.m-2(name='pid' type='hidden' value='#{pid}')
+
               if(user) {
                 var uid = document.getElementById("uid");
                 uid.value = user.uid;
