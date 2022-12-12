@@ -1,0 +1,45 @@
+extends layout2
+
+block content
+    div#content.p-5
+        h1#hello Hello Host
+        button.btn.btn-secondary.my-3 Add new property 
+        table.table 
+            thead 
+                tr 
+                th Property ID 
+                th Title 
+                th Nightly Fee 
+                th Cleaning Fee 
+                th Service Fee 
+                th Type 
+                th Bedrooms
+                th 
+                th 
+            tbody 
+                each result in results
+                    tr 
+                        td=result.pid
+                        td=result.title 
+                        td=result.nightly_fee 
+                        td=result.cleaning_fee 
+                        td=result.service_fee 
+                        td=result.type 
+                        td=result.bedrooms
+                        td 
+                            button.btn.btn-secondary Edit 
+                        td 
+                            button.btn.btn-secondary Remove
+    script. 
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user)
+            document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
+        else{
+            window.location.href = "/login";
+            alert('Please log in first!')
+        }
+        if (!user.is_host){
+            if (confirm("Do you want to become a host?")){
+                //- call update user api to change is_host
+            }
+        }

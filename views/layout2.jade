@@ -24,7 +24,7 @@ html
       | &#x9;&#x9;
       #navbarNavAltMarkup.collapse.navbar-collapse
         .navbar-nav
-          a.nav-item.nav-link(href='#') Become a Host
+          a#host.nav-item.nav-link(href='/host') Host
           | &#x9;&#x9;&#x9;
           a.nav-item.nav-link(href='#') Help
           | &#x9;&#x9;&#x9;
@@ -121,7 +121,9 @@ html
         const user = JSON.parse(localStorage.getItem('user'));
         var resvLink = document.getElementById('resv');
         var favLink = document.getElementById('fav');
+        var hostLink = document.getElementById('host');
         
         resvLink.href = '/reservationsList/' + user.uid;
         favLink.href = '/favourites/' + user.uid;
+        hostLink.href = '/host/' + user.uid;
       })

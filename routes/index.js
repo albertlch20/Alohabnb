@@ -223,6 +223,27 @@ router.get('/welcome', function(req, res) {
 
 });
 
+router.get('/host/:uid', function(req, res) {
+	var collection = db.get('users');
+	var collection2 = db.get('properties');
+    var uid = req.params.uid;
+	const results_from_mongo = [];
+    if (uid !== undefined){
+		collection.findOne({ uid: Number(uid) }, function(err, user){
+			if (err) throw err;
+			var list = user.owned_properties;
+			collection2.find( {'pid' : {$in:list} } )
+			.each(function(doc){
+				results_from_mongo.push(doc);
+			})
+			.then(function(){
+				res.render('host', {"results": results_from_mongo });
+			});
+			//res.json(results_from_mongo)
+			//res.render('host', {"results": results_from_mongo } );
+    	});
+	}
+});
 
 router.post('/register', function(req, res) {
 	
