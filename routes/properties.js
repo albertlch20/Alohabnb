@@ -145,7 +145,7 @@ router.put('/update', function(req, res) {
 		res.send({ message:'Properties is updated' });
     }
 });
-
+/*
 router.post('/comments', function(req, res) {
 	var collection = db.get('users');
 	var collection2 = db.get('properties');
@@ -185,17 +185,17 @@ router.post('/comments', function(req, res) {
 	} else {
 		res.json({"results": "Please try again" });
 	}
-});
+});*/
 
 router.post('/comments', function(req, res) {
 	var collection = db.get('users');
 	var collection2 = db.get('properties');
 	var uid = req.body.uid;
-	var pid = req.body.pid
+	var pid = req.body.pid;
 	//var text = "testing2";
 	var text = req.body.text;
 	//var rating = String(5);
-	var rating = 5;
+	var rating = 4;
 	const date = new Date();
 
 	let day = date.getDate();
@@ -203,9 +203,8 @@ router.post('/comments', function(req, res) {
 	let year = date.getFullYear();
 
 	let currentDate = `${month}-${day}-${year}`;
-	console.log(pid);
 	//var reviews = '{"uid": 1, "rating": 5, "text": "goodgood", "date": "2022-11-20"}';
-	var reviews = '{"uid": '+ 1 + ', "rating": ' + rating + ', "text": "' + text + '", "date": "' + currentDate + '"}';
+	var reviews = '{"uid": "'+ uid + '" , "rating": ' + rating + ', "text": "' + text + '", "date": "' + currentDate + '"}';
 
 
 	if(uid !== undefined && pid !== undefined) {

@@ -41,21 +41,30 @@ block content
                   th(scope='row') Amenities: 
                   td #{amenities}
             div(class='form-group')
-              //label(htmlfor='exampleFormControlTextarea1') Add Comment
-              //textarea#exampleFormControlTextarea1(class='form-control' rows='3')
             .input-group
-              //button.btn.btn-primary.m-2(type='submit' onclick='{returnToMainPage}') Submit
               form(action="/users/favourites" method='POST')
-                input#uid.btn.btn-primary.m-2(name='uid' type='hidden' value='')
+                input#uid.btn.btn-primary.m-2(name='uid' type='hidden' value='#{uid}')
                 input#pid.btn.btn-primary.m-2(name='pid' type='hidden' value='#{pid}')
                 input.btn.btn-primary.m-2(type='submit' value='Add to Favourites')
               form(action="/newReservation/#{pid}")
                 input.btn.btn-primary.m-2(type='submit' value='Reserve')
             //// comment
-            div(classname='form-group')
-              label(htmlfor='commentForm') Add Comment
-              ////comment submit
+            div(class='form-group')
+              .input_group
             form(action="/properties/comments" method='POST')
+              .row
+                .col-md-12
+                  .stars
+                      input#star-5.star.star-5(type='radio' name='star')
+                      label.star.star-5(for='star-5')
+                      input#star-4.star.star-4(type='radio' name='star')
+                      label.star.star-4(for='star-4')
+                      input#star-3.star.star-3(type='radio' name='star')
+                      label.star.star-3(for='star-3')
+                      input#star-2.star.star-2(type='radio' name='star')
+                      label.star.star-2(for='star-2')
+                      input#star-1.star.star-1(type='radio' name='star')
+                      label.star.star-1(for='star-1')
               textarea#text(name='text' classname='form-control' rows='3')
               input#uid.btn.btn-primary.m-2(name='uid' type='hidden' value='#{uid}')
               input#pid.btn.btn-primary.m-2(name='pid' type='hidden' value='#{pid}')
@@ -66,7 +75,6 @@ block content
             table.table
               thead
                 tr
-                th uid
                 th Date
                 th Rating
                 th Comments
@@ -74,7 +82,6 @@ block content
               tbody
                 each review in reviews
                   tr
-                    td= review.uid
                     td= review.date
                     td= review.rating
                     td= review.text
@@ -86,14 +93,15 @@ block content
             ///
             script.
               const user = JSON.parse(localStorage.getItem('user'));
-
               if(user) {
                 var uid = document.getElementById("uid");
                 uid.value = user.uid;
+                console.log(uid.value);
               } else {
                 window.location.href = "/login";
                 alert('Please log in first!');
               }
+
 
               $(document).ready(function() {
                 if('#{updateResult}' !== '') {
