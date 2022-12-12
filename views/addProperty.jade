@@ -5,7 +5,7 @@ block content
 		h1 Register Your Property
 		br
 		p#showRes.hidden Success
-		form(action='/properties', method='post')
+		form(id='form1', action='/properties', method='post')
 			div.form-group
 				label(for='title') Title
 				input#title.form-control(name='title' type='text' placeholder='Title')
@@ -46,7 +46,7 @@ block content
 				input#pond.filepond(type='file' name='filepond' multiple data-allow-reorder='true' data-max-file-size='3MB' data-max-files='3')
 			input#uid.form-control(type='hidden' name='uid' )
 			br
-			input.btn.btn-primary(type='submit', value='Submit')
+			button.btn.btn-secondary(type='submit', form='form1', value='Submit') Submit
 			
 			script(src="https://unpkg.com/filepond@^4/dist/filepond.js")
 			script.
