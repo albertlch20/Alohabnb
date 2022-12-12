@@ -5,8 +5,23 @@ var monk = require('monk');
 var db = monk('127.0.0.1:27017/alohabnb');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/:uid', function(req, res) {
+  var collection = db.get('users');
+  var uid = req.params.uid;
+  collection.findOne({ uid: Number(uid) }, function(err, user){
+      if (err) throw err;
+      res.json(user);
+  });
+});
+
+router.put('/update/:uid', function(req, res) {
+  var collection = db.get('users');
+  var uid = req.params.uid;
+  const {is_host} = req.body;
+  if (uid !== undefined){
+      if (is_host !== undefined)
+        collection.update({uid : Number(uid)}, {$set : {"is_host" : is_host}}, {upsert : false}, {multi : false});
+  }
 });
 
 router.post('/favourites', function(req, res) {

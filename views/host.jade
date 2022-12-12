@@ -32,14 +32,22 @@ block content
                             button.btn.btn-secondary Remove
     script. 
         const user = JSON.parse(localStorage.getItem('user'));
-        if (user)
-            document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
-        else{
+        if (!user){
             window.location.href = "/login";
             alert('Please log in first!')
         }
-        if (!user.is_host){
-            if (confirm("Do you want to become a host?")){
-                //- call update user api to change is_host
+
+        fetch('/users/' + user.uid, {method: 'GET'})
+        .then( res => res.json())
+        .then( (data) => {
+            if (!data.is_host){
+                if (confirm("Would you like to become a host?")){
+                    //- call update user api to change is_host
+                    fetch('/users/update/' + user.uid, {method: "PUT", headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify( { "is_host": true } )})
+                    document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
+                }
+                else{
+                    window.location.href = "/";
+                }
             }
-        }
+        });
