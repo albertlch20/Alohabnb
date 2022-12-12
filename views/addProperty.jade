@@ -4,6 +4,7 @@ block content
 	div.p-5
 		h1 Register Your Property
 		br
+		p#showRes.hidden Success
 		form(action='/properties', method='post')
 			div.form-group
 				label(for='title') Title
@@ -68,3 +69,19 @@ block content
 				FilePond.create(
 				  document.getElementById('pond')
 				);
+				
+				var showRes = document.getElementById("showRes");
+				
+				if('#{results}' !== undefined) {
+					showRes.textContent='#{results}';
+					showRes.classList.remove('hidden');
+				}
+				
+				/*$(document).ready(function(){
+					var showRes = document.getElementById("showRes");
+					
+					if('#{results}' !== undefined) {
+						showRes.textContent='#{results}';
+						showRes.classList.remove('hidden');
+					}
+				}*/

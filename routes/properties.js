@@ -51,7 +51,7 @@ router.post('/', function(req, res) {
 			if(Number(doc.pid) >= maxPid) {
 				maxPid = Number(doc.pid) + 1;
 			}
-			if(doc.amenities) {
+			if(doc.images) {
 				for(var i=0; i<doc.images.length; ++i) {
 					var str = doc.images[i];
 					var strSplit = str.split('.');
@@ -64,11 +64,18 @@ router.post('/', function(req, res) {
 		.then(function(){
 			var filePaths=req.body.filepond;
 
-			for(var i=0; i<filePaths.length; ++i) {
-				var newId = maxPicId+i;
-				fileNames[i] = String(newId) + ".jpg";
-				var newFilePath = __dirname + "/../public/" + fileNames[i];
-				fs.rename(filePaths[i], newFilePath, (err)=>{});
+			if(typeof filePaths === 'string') {
+				var newId = maxPicId+1;
+				fileNames.push(String(newId) + ".jpg");
+				var newFilePath = __dirname + "/../public/" + fileNames[0];
+				fs.rename(filePaths, newFilePath, (err)=>{});
+			} else if(typeof filePaths === 'object') {
+				for(var i=0; i<filePaths.length; ++i) {
+					var newId = maxPicId+i;
+					fileNames[i] = String(newId) + ".jpg";
+					var newFilePath = __dirname + "/../public/" + fileNames[i];
+					fs.rename(filePaths[i], newFilePath, (err)=>{});
+				}
 			}
 		})
 		.then(function(){
@@ -89,10 +96,10 @@ router.post('/', function(req, res) {
 			});
 		})
 		.then(function(){
-			collection.update({pid:Number(maxPid)}, {$addToSet : {"images" : {$each : fileNames}}}, {upsert : false}, {multi : false}, function(err, property){
-				if (err) throw err;
-				res.render('addProperty');
-			});
+			collection.update({pid:Number(maxPid)}, {$addToSet : {"images" : {$each : fileNames}}})
+				.then(function(){
+					res.render('addProperty', {"results": "Your property is registered successfully!"});
+				});
 		});
 });
 
