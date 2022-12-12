@@ -245,6 +245,10 @@ router.get('/host/:uid', function(req, res) {
 	}
 });
 
+router.get('/addProperty', function(req, res) {
+	res.render('addProperty');
+});
+
 router.post('/register', function(req, res) {
 	
 	const {username, email, password } = req.body;
@@ -388,5 +392,22 @@ router.get('/test', function(req, res) {
 		});
 	}
 });
+
+router.post("/upload", function(req, res){
+  console.log("BEGIN /upload");
+  const form = formidable({ multiples: false });
+	
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    let theFile = files.filepond.filepath;
+    //console.log("theFile: " + theFile);
+
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end(theFile);
+  });  
+})
 
 module.exports = router;

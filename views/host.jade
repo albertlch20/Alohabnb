@@ -1,57 +1,61 @@
 extends layout2
 
 block content
-    div#content.p-5
-        h1#hello Hello Host
-        button.btn.btn-secondary.my-3 Add new property 
-        table.table 
-            thead 
-                tr 
-                th Property ID 
-                th Title 
-                th Nightly Fee 
-                th Cleaning Fee 
-                th Service Fee 
-                th Type 
-                th Bedrooms
-                th 
-                th 
-            tbody 
-                each result in results
-                    tr 
-                        td=result.pid
-                        td=result.title 
-                        td=result.nightly_fee 
-                        td=result.cleaning_fee 
-                        td=result.service_fee 
-                        td=result.type 
-                        td=result.bedrooms
-                        td 
-                            button.btn.btn-secondary Edit 
-                        td 
-                            button.btn.btn-secondary Remove
-    script. 
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (!user){
-            window.location.href = "/login";
-            alert('Please log in first!')
-        }
+	div#content.p-5
+		h1#hello Hello Host
+		button.btn.btn-secondary.my-3(onclick='addProperty()') Add new property 
+		table.table 
+			thead 
+				tr 
+				th Property ID 
+				th Title 
+				th Nightly Fee 
+				th Cleaning Fee 
+				th Service Fee 
+				th Type 
+				th Bedrooms
+				th 
+				th 
+			tbody 
+				each result in results
+					tr 
+						td=result.pid
+						td=result.title 
+						td=result.nightly_fee 
+						td=result.cleaning_fee 
+						td=result.service_fee 
+						td=result.type 
+						td=result.bedrooms
+						td 
+							button.btn.btn-secondary Edit 
+						td 
+							button.btn.btn-secondary Remove
+	script. 
+		const user = JSON.parse(localStorage.getItem('user'));
+		if (!user){
+			window.location.href = "/login";
+			alert('Please log in first!')
+		}
 
-        fetch('/users/' + user.uid, {method: 'GET'})
-        .then( res => res.json())
-        .then( (data) => {
-            console.log(data)
-            if (!data.is_host){
-                if (confirm("Would you like to become a host?")){
-                    //- call update user api to change is_host
-                    fetch('/users/update/' + user.uid, {method: "PUT", headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify( { "is_host": true } )})
-                    .then(location.reload());
-                }
-                else{
-                    window.location.href = "/";
-                }
-            }
-            else{
-                document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
-            }
-        });
+		fetch('/users/' + user.uid, {method: 'GET'})
+		.then( res => res.json())
+		.then( (data) => {
+			console.log(data)
+			if (!data.is_host){
+				if (confirm("Would you like to become a host?")){
+					//- call update user api to change is_host
+					fetch('/users/update/' + user.uid, {method: "PUT", headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify( { "is_host": true } )})
+					.then(location.reload());
+				}
+				else{
+					window.location.href = "/";
+				}
+			}
+			else{
+				document.getElementById('hello').innerHTML = document.getElementById('hello').innerHTML + " " + user.username + " !";
+			}
+		});
+		
+		function addProperty() {
+			window.location.href = "/addProperty";
+		}
