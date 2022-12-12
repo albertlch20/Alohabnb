@@ -148,41 +148,15 @@ a {
 	border: none;
 }
 
-.thumbnail {
-	height: 150px !important;
-	width: 150px !important;
-	display: inline block;
-	margin-left: 8px;
-}
 
-.thumbnail img {
-	width:100%;
-	height:100%;
-	object-fit:cover;
-	display:block;
-	border-radius: 25px;
-}
 
-.topnav {
-	background: #FFFFFF;
-	padding-left: 15px;
-	border-bottom:1px solid #E0E0E0;
-}
 
-img.pointer {
-	cursor: pointer;
-}
-h5.pointer {
-	cursor: pointer;
-}
 
-.backButton {
-	background-color: #555555;
-	border-radius: 12px;
-	color: white;
-	font-size: 18px;
-	padding: 2px 24px;
-}
+
+
+
+
+
 
 .hidden {
 	visibility:hidden;
@@ -328,4 +302,128 @@ label.star:before {
 
 	font-family: FontAwesome;
 
+}
+
+
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+#wrapper{
+	background:$background;
+	width: 100%;
+	height: 100vh
+}
+
+.card {
+	border-radius: 0.5rem;
+
+	left: 0%;
+
+	padding: 1.5rem;
+	width: 90%;
+}
+
+
+img{
+	border: 3px solid $purple;
+}
+h4{
+	color: $muted;
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	letter-spacing: -0.1rem;
+	padding-bottom: 0.5rem;
+}
+textarea{
+	width: 100%;
+	background: #eee;
+	outline: none;
+	border: none;
+	padding: 0.5rem;
+	resize: none;
+	box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.19);
+	border-radius: 2px;
+	margin-bottom: 0.3rem;
+	color: $muted;
+}
+button{
+	background: $purple;
+	color: $white;
+	padding: 0.3rem 0.5rem;
+	border-radius: 0.4rem;
+	font-size: $button-font-size;
+	text-transform: uppercase;
+	font-weight: light;
+	letter-spacing: 2px;
+	border: none;
+	cursor: pointer;
+	outline: none;
+&:hover{
+	 background: #989898;
+	 transition: all 1s;
+ }
+}
+ul{
+	border-top: 1px solid $muted;
+	padding-top: 15px;
+	margin-top: 15px;
+}
+li{
+	list-style: none;
+
+&:hover{opacity: 0.4; transition: color 3s;}
+}
+li.like::after{
+	font-family: 'Font Awesome 5 Free';
+	content: "\f164";
+	visibility: visible;
+	font-weight: 900;
+	padding-left: 5px;
+}
+li.likeClicked{
+	color: $purple;
+&:hover{opacity: 1; cursor: default;}
+}
+li.reply::after{
+	font-family: 'Font Awesome 5 Free';
+	content: "\f4ad";
+	visibility: visible;
+	font-weight: 900;
+	padding-left: 5px;
+}
+}
+
+
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+input.removeButton{
+	color: #000000;
+	padding: 0.1rem 0.5rem;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: smaller;
+	text-transform: uppercase;
+
+
+
+
+&::before{
+	 font-family: 'Font Awesome 5 Free';
+	 content: "\f2ed";
+	 visibility: visible;
+	 font-weight: 900;
+	 float: right;
+	 padding-left: 5px;
+ }
 }
