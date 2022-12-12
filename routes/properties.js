@@ -138,5 +138,45 @@ router.post('/comments', function(req, res) {
 	}
 });
 
+router.post('/comments', function(req, res) {
+	var collection = db.get('users');
+	var collection2 = db.get('properties');
+	var uid = req.body.uid;
+	var pid = req.body.pid
+	//var text = "testing2";
+	var text = req.body.text;
+	//var rating = String(5);
+	var rating = 5;
+	const date = new Date();
+
+	let day = date.getDate();
+	let month = date.getMonth() + 1;
+	let year = date.getFullYear();
+
+	let currentDate = `${month}-${day}-${year}`;
+	console.log(pid);
+	//var reviews = '{"uid": 1, "rating": 5, "text": "goodgood", "date": "2022-11-20"}';
+	var reviews = '{"uid": '+ 1 + ', "rating": ' + rating + ', "text": "' + text + '", "date": "' + currentDate + '"}';
+
+
+	if(uid !== undefined && pid !== undefined) {
+		collection2.update(
+			{pid:Number(pid)},
+			{$addToSet: {reviews: JSON.parse(reviews)}},
+			function(err, comment){
+				if (err) throw err;
+				var ret = {'updateResult':'Successfully added comment'};
+
+				collection2.findOne({pid:Number(pid)}, function(err, property){
+					if (err) throw err;
+					Object.assign(ret, ret, property);
+					res.render('detail', ret);
+				});
+			}
+		);
+	} else {
+		res.json({"results": "Please try again" });
+	}
+});
 
 module.exports = router;
