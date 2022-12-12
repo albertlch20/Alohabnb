@@ -3,16 +3,50 @@ extends layout
 block content
     div.p-5
         h1 Register 
-        form(action='/register', method='post')
+        form
             #form-group
                 label Username: 
-                input.form-control(name='username', type='text')
+                input#username.form-control(name='username', type='text')
             #form-group
                 label Email: 
-                input.form-control(name='email', type='text')
+                input#email.form-control(name='email', type='text')
             #form-group
                 label Password: 
-                input.form-control(name='password', type='text')
+                input#password.form-control(name='password', type='text')
                 span#msg Must contain at least 6 characters
             br
-            input.btn.btn-primary(type='submit', value='Submit')
+            input#submit.btn.btn-primary(value='Submit')
+    script. 
+        document.getElementById('submit').onclick = function(){
+            fetch('http://localhost:3000/register', {
+                method: "POST",
+                headers : { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify( { 
+
+                    "username": document.getElementById('username').value,
+                    "email": document.getElementById('email').value,
+                    "password": document.getElementById('password').value
+
+                } )
+            })
+            .then( res => res.json() )
+            .then( (data) => { 
+
+                if (data.error){
+                    alert(data.error);
+                    if (data.error === "User already exists. Please login!")
+                        window.location.href = "/login";
+                }
+                else{
+                    alert('Success!')
+                    window.location.href = "/login";
+                }
+                
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+        }

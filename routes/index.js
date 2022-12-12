@@ -255,7 +255,7 @@ router.post('/register', function(req, res) {
 	}
 	else{
 
-		collection.findOne({ email: email }, function(err, user){
+		collection.findOne({$or: [{ email: email }, {username: username}]}, function(err, user){
 			if (err) throw err;
 
 			if (user){
@@ -270,28 +270,34 @@ router.post('/register', function(req, res) {
 			}
 			else{
 				var hash = bcrypt.hashSync(password, 10);
-				let newUser = {
-					uid: 6,
-					username: username,
-					is_host: false,
-					owned_properties: [],
-					favorite_list: [],
-					password: hash,
-					email: email
-				}
-				
-				collection.insert(newUser, function(err, user){
+				collection.count()
+				.then(c => {
+					let newUser = {
+						uid: c+1,
+						username: username,
+						is_host: false,
+						owned_properties: [],
+						favorite_list: [],
+						password: hash,
+						email: email
+					};
+
+					collection.insert(newUser, function(err, user){
 					
-          			if (err) throw err;
-					var token = jwt.sign({ user_id: user._id, email}, 'secretkey');
+						if (err) throw err;
+						var token = jwt.sign({ user_id: user._id, email}, 'secretkey');
 
-					if (token){
-						user.token = token;
+						if (token){
+							user.token = token;
 
-					}
-					res.json(user);
+						}
+						res.json(user);
 
-				})
+					});
+				});
+
+				
+
 
 
 			}
