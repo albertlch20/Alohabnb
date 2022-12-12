@@ -25,7 +25,7 @@ block content
                 p(class='card-text') #{property.bedrooms}-bedroom
                 p(class='card-text') $#{property.nightly_fee}/night
 
-              button.btn.btn-primary.btn-block(class='button', type='submit', onclick='delFavourites("#{property.pid}")') Delete from list
+              button.btn.btn-secondary(type='submit', onclick='delFavourites("#{property.pid}")') Delete from list
               script.
                 function delFavourites(pid){
                   const user = JSON.parse(localStorage.getItem('user'));

@@ -15,7 +15,7 @@ block content
 						td= result.start_date
 						td= result.end_date
 						td
-							button(value=result.start_date, class='hidden', type='submit', onclick='delReservation("#{result.rid}")') Cancel
+							button.btn.btn-secondary(value=result.start_date, class='hidden', type='submit', onclick='delReservation("#{result.rid}")') Cancel
 							script.						
 								function delReservation(rid){
 									var val = confirm ("Cancel this reservation?");
