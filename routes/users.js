@@ -21,7 +21,7 @@ router.post('/favourites', function(req, res) {
 			{$addToSet: {favorite_list: Number(pid)}},
 			function(err, reservation){
 				if (err) throw err;
-				var ret = {'updateResult':'Update successfully'};
+				var ret = {'updateResult':'Successfully added to favourite list'};
 				
 				collection2.findOne({pid:Number(pid)}, function(err, property){
 					if (err) throw err;
