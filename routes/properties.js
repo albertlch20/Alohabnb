@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const fs = require('fs');
 
 var monk = require('monk');
 
@@ -32,28 +33,65 @@ router.delete('/delete', function(req, res) {
 //create
 router.post('/', function(req, res) {
 	var collection = db.get('properties');
+	router.use(express.urlencoded({ extended: true }));
+	
 	//amenity
-	var amenityStr = req.query.amenities;
-	var amenityArr = amenityStr.split(',');
-	var imageStr = req.query.image;
-	var imageArr = imageStr.split(',');
+	console.log(req.body);
+	var amenityStr = req.body.amenities;
+	var amenityArr=[];
+	if(amenityStr !== undefined) {
+		amenityArr = amenityStr.split(',');
+	}
+	var maxPid = 0;
+	var maxPicId = 0;
+	var fileNames=[];
 
-	collection.insert({ 
-		title: req.query.title,
-		location: req.query.location,
-		description:req.query.description,
-		nightly_fee: Number(req.query.nightly_fee),
-		cleaning_fee: Number(req.query.cleaning_fee),
-		service_fee: Number(req.query.service_fee),
-		amenities: amenityArr,
-		image: imageArr,
-		id: Number(req.query.id),
-		bedroom: Number(req.query.bedroom)
-	}, function(err, property){
-		if (err) throw err;
-		// if insert is successfull, it will return newly inserted object
-	  	res.json(property);
-	});
+	collection.find({})
+		.each(function(doc){		
+			if(Number(doc.pid) >= maxPid) {
+				maxPid = Number(doc.pid) + 1;
+			}
+			if(doc.amenities) {
+				for(var i=0; i<doc.images.length; ++i) {
+					var str = doc.images[i];
+					var strSplit = str.split('.');
+					if(Number(strSplit[0]) >= maxPicId) {
+						maxPicId = Number(strSplit[0]) + 1;
+					}
+				}
+			}
+		})
+		.then(function(){
+			var filePaths=req.body.filepond;
+
+			for(var i=0; i<filePaths.length; ++i) {
+				var newId = maxPicId+i;
+				fileNames[i] = String(newId) + ".jpg";
+				var newFilePath = __dirname + "/../public/" + fileNames[i];
+				fs.rename(filePaths[i], newFilePath, (err)=>{});
+			}
+		})
+		.then(function(){
+			collection.insert({ 
+				title: req.body.title,
+				location: req.body.location,
+				description:req.body.description,
+				nightly_fee: Number(req.body.nightly_fee),
+				cleaning_fee: Number(req.body.cleaning_fee),
+				service_fee: Number(req.body.service_fee),
+				amenities: amenityArr,
+				pid: Number(maxPid),
+				bedroom: Number(req.body.bedrooms)
+			}, function(err, property){
+				if (err) throw err;
+			});
+		})
+		.then(function(){
+			collection.update({pid:Number(maxPid)}, {$addToSet : {"images" : {$each : fileNames}}}, {upsert : false}, {multi : false}, function(err, property){
+				if (err) throw err;
+				res.render('addProperty');
+			});
+		});
 });
 
 //update
