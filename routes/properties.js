@@ -81,7 +81,9 @@ router.post('/', function(req, res) {
 				service_fee: Number(req.body.service_fee),
 				amenities: amenityArr,
 				pid: Number(maxPid),
-				bedroom: Number(req.body.bedrooms)
+				bedrooms: Number(req.body.bedrooms),
+				type: req.body.type,
+				is_available: true
 			}, function(err, property){
 				if (err) throw err;
 			});

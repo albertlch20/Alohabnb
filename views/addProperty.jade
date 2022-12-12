@@ -2,7 +2,7 @@ extends layout2
 
 block content
 	div.p-5
-		h1 Register your property
+		h1 Register Your Property
 		br
 		form(action='/properties', method='post')
 			div.form-group
@@ -30,6 +30,17 @@ block content
 			div.form-group
 				label(for='bedrooms') Number of bedrooms
 				input#bedrooms.form-control(name='bedrooms' type='text' placeholder='Number of bedrooms')
+				br
+			div.form-group
+				div.input-group.mb-3
+					div.input-group-prepend
+						label.input-group-text(for='type') Property Type
+					select#type.custom-select(name='type')
+						option(selected='') Choose...
+						option(value='House') House
+						option(value='Apartment') Apartment
+						option(value='Townhouse') Townhouse
+				
 			br
 			div.form-group
 				input#pond.filepond(type='file' name='filepond' multiple data-allow-reorder='true' data-max-file-size='3MB' data-max-files='3')
