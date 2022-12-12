@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
 	
 	const results_from_mongo = [];
 
-	collection.find({})
+	collection.find({is_available:true})
 		.each(function(doc){
 			results_from_mongo.push(doc);
 		})
@@ -169,7 +169,7 @@ router.get('/logged', function(req, res) {
 	
 	const results_from_mongo = [];
 
-	collection.find({})
+	collection.find({is_available:true})
 		.each(function(doc){
 			results_from_mongo.push(doc);
 		})

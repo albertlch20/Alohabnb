@@ -85,7 +85,7 @@ router.delete('/favourites/:uid/:pid', function(req, res) {
 	}
 });
 
-router.post('/owned_properties', function(req, res) {
+/*router.post('/owned_properties', function(req, res) {
 	console.log('API users/owned_properties');
 	var uid = req.body.uid;
 	var pid = req.body.pid;
@@ -110,6 +110,6 @@ router.post('/owned_properties', function(req, res) {
 				});
 			});
 		});
-});
+});*/
 
 module.exports = router;

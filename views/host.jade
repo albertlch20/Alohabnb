@@ -14,6 +14,7 @@ block content
 				th Service Fee 
 				th Type 
 				th Bedrooms
+				th Open for rent?
 				th 
 				th 
 			tbody 
@@ -26,6 +27,7 @@ block content
 						td=result.service_fee 
 						td=result.type 
 						td=result.bedrooms
+						td=result.is_available
 						td 
 							button.btn.btn-secondary EDIT 
 						td 
@@ -64,7 +66,7 @@ block content
 		function setUnavail(pid){
 			var val = confirm ("Set this property to unavailable?");
 			if (val==true){
-				fetch('/users/owned_properties', {
+				fetch('/properties/setUnavail', {
 					method: 'POST',
 					headers: {'Content-Type': 'application/json'},
 					mode: 'cors',
