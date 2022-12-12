@@ -4,6 +4,7 @@ var router = express.Router();
 const jwt = require('jsonwebtoken');
 const auth = require('./middleware/auth');
 const bcrypt = require('bcryptjs')
+const formidable = require('formidable');
 
 var monk = require('monk');
 const { response } = require('express');
@@ -403,7 +404,7 @@ router.post("/upload", function(req, res){
       return;
     }
     let theFile = files.filepond.filepath;
-    //console.log("theFile: " + theFile);
+    console.log("theFile: " + theFile);
 
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end(theFile);
