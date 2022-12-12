@@ -37,20 +37,25 @@ block content
 					div.input-group-prepend
 						label.input-group-text(for='type') Property Type
 					select#type.custom-select(name='type')
-						option(selected='') Choose...
+						option(selected='' value='House') Choose...
 						option(value='House') House
 						option(value='Apartment') Apartment
-						option(value='Townhouse') Townhouse
-				
+						option(value='Townhouse') Townhouse		
 			br
 			div.form-group
 				input#pond.filepond(type='file' name='filepond' multiple data-allow-reorder='true' data-max-file-size='3MB' data-max-files='3')
-			input#uid.form-control(type='hidden')
+			input#uid.form-control(type='hidden' name='uid' )
 			br
 			input.btn.btn-primary(type='submit', value='Submit')
 			
 			script(src="https://unpkg.com/filepond@^4/dist/filepond.js")
 			script.
+				const user = JSON.parse(localStorage.getItem('user'));
+				if(user) {
+					var uid = document.getElementById("uid");
+					uid.value = user.uid;
+				}
+				
 				/*FilePond.registerPlugin(
 					FilePondPluginImagePreview,
 					FilePondPluginImageExifOrientation,
@@ -76,12 +81,3 @@ block content
 					showRes.textContent='#{results}';
 					showRes.classList.remove('hidden');
 				}
-				
-				/*$(document).ready(function(){
-					var showRes = document.getElementById("showRes");
-					
-					if('#{results}' !== undefined) {
-						showRes.textContent='#{results}';
-						showRes.classList.remove('hidden');
-					}
-				}*/

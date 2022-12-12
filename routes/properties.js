@@ -33,6 +33,7 @@ router.delete('/delete', function(req, res) {
 //create
 router.post('/', function(req, res) {
 	var collection = db.get('properties');
+	var collection2 = db.get('users');
 	router.use(express.urlencoded({ extended: true }));
 	
 	//amenity
@@ -90,10 +91,15 @@ router.post('/', function(req, res) {
 				pid: Number(maxPid),
 				bedrooms: Number(req.body.bedrooms),
 				type: req.body.type,
-				is_available: true
+				is_available: true,
+				reviews: [],
+				owner: Number(req.body.uid)
 			}, function(err, property){
 				if (err) throw err;
 			});
+		})
+		.then(function(){
+			collection2.update({uid:Number(req.body.uid)}, {$addToSet : {"owned_properties" : Number(maxPid)}});
 		})
 		.then(function(){
 			collection.update({pid:Number(maxPid)}, {$addToSet : {"images" : {$each : fileNames}}})

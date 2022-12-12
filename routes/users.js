@@ -85,4 +85,31 @@ router.delete('/favourites/:uid/:pid', function(req, res) {
 	}
 });
 
+router.post('/owned_properties', function(req, res) {
+	console.log('API users/owned_properties');
+	var uid = req.body.uid;
+	var pid = req.body.pid;
+	var collection = db.get('users');
+	var collection2 = db.get('properties');
+	var results_from_mongo = [];
+	
+	//console.log('uid', uid);
+	//console.log('pid', pid);
+	
+	collection.update({uid:Number(uid)}, {$pull : {"owned_properties" : Number(pid)}})
+		.then(function(){
+			collection.findOne({ uid: Number(uid) }, function(err, user){
+				if (err) throw err;
+				var list = user.owned_properties;
+				collection2.find( {'pid' : {$in:list} } )
+				.each(function(doc){
+					results_from_mongo.push(doc);
+				})
+				.then(function(){
+					res.render('host', {"results": results_from_mongo });
+				});
+			});
+		});
+});
+
 module.exports = router;

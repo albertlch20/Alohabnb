@@ -27,9 +27,10 @@ block content
 						td=result.type 
 						td=result.bedrooms
 						td 
-							button.btn.btn-secondary Edit 
+							button.btn.btn-secondary EDIT 
 						td 
-							button.btn.btn-secondary Remove
+							button.btn.btn-secondary(type='submit', onclick='setUnavail("#{result.pid}")') REMOVE
+							
 	script. 
 		const user = JSON.parse(localStorage.getItem('user'));
 		if (!user){
@@ -59,3 +60,16 @@ block content
 		function addProperty() {
 			window.location.href = "/addProperty";
 		}
+		
+		function setUnavail(pid){
+			var val = confirm ("Set this property to unavailable?");
+			if (val==true){
+				fetch('/users/owned_properties', {
+					method: 'POST',
+					headers: {'Content-Type': 'application/json'},
+					mode: 'cors',
+					body: JSON.stringify({"pid" : String(pid), "uid" : String(user.uid)})
+				});
+				location.reload();
+			}
+		};
