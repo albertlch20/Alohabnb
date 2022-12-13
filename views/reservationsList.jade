@@ -18,10 +18,11 @@ block content
 							button.btn.btn-secondary(value=result.start_date, class='hidden', type='submit', onclick='delReservation("#{result.rid}")') Cancel
 							script.						
 								function delReservation(rid){
+									const user = JSON.parse(localStorage.getItem('user'));
 									var val = confirm ("Cancel this reservation?");
 									if (val==true){
-										fetch('/reservations/' + rid, {method: 'DELETE'});
-										location.reload();
+										fetch('/reservations/' + rid, {method: 'DELETE'})
+											.then(()=>{window.location.href = "/reservationsList/"+String(user.uid);})
 									}
 								};
 				script.

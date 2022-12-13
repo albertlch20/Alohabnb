@@ -71,8 +71,8 @@ block content
 					headers: {'Content-Type': 'application/json'},
 					mode: 'cors',
 					body: JSON.stringify({"pid" : String(pid), "uid" : String(user.uid)})
-				});
-				location.reload();
+				})
+				.then(()=>{window.location.href = "/host/"+String(user.uid);});
 			}
 		};
 		
