@@ -192,10 +192,11 @@ router.post('/comments', function(req, res) {
 	var collection2 = db.get('properties');
 	var uid = req.body.uid;
 	var pid = req.body.pid;
+	var rating = req.body.star;
+	//var rating = 5;
 	//var text = "testing2";
 	var text = req.body.text;
 	//var rating = String(5);
-	var rating = 4;
 	const date = new Date();
 
 	let day = date.getDate();
