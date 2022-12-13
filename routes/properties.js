@@ -121,9 +121,15 @@ router.post('/', function(req, res) {
 //update
 router.post('/update', function(req, res) {
 	var collection = db.get('properties');
-	var is_available=(req.body.is_available==='true' || req.body.is_available==='1' || req.body.is_available==='True');
+	var is_available = (req.body.is_available === undefined);
 	var maxPicId = 0;
 	var fileNames=[];
+	
+	if (req.body.is_available === 'on') {
+		is_available=Boolean(true);
+	} else {
+		is_available=Boolean(false);
+	}
 	
 	console.log('E properties update');
 	router.use(express.urlencoded({ extended: true }));
@@ -188,8 +194,8 @@ router.post('/update', function(req, res) {
 					collection.update({pid:Number(req.body.pid)}, {$set : {"owner" : Number(req.body.owner)}});
 				if (req.body.type !== undefined)
 					collection.update({pid:Number(req.body.pid)}, {$set : {"type" : String(req.body.type)}});
-				if (req.body.is_available !== undefined)
-					collection.update({pid:Number(req.body.pid)}, {$set : {"is_available" : is_available}});
+				if (is_available !== undefined)
+					collection.update({pid:Number(req.body.pid)}, {$set : {"is_available" : Boolean(is_available)}});
 				if (req.body.amenities !== undefined)
 					collection.update({pid:Number(req.body.pid)}, {$addToSet : {"amenities" : {$each : amenityArr}}});
 			}
