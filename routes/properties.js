@@ -193,6 +193,9 @@ router.post('/comments', function(req, res) {
 	var uid = req.body.uid;
 	var pid = req.body.pid;
 	var rating = req.body.star;
+	if(!rating){
+		rating = '';
+	}
 	//var rating = 5;
 	//var text = "testing2";
 	var text = req.body.text;
@@ -205,7 +208,7 @@ router.post('/comments', function(req, res) {
 
 	let currentDate = `${month}-${day}-${year}`;
 	//var reviews = '{"uid": 1, "rating": 5, "text": "goodgood", "date": "2022-11-20"}';
-	var reviews = '{"uid": "'+ uid + '" , "rating": ' + rating + ', "text": "' + text + '", "date": "' + currentDate + '"}';
+	var reviews = '{"uid": "'+ uid + '" , "rating": "' + rating + '", "text": "' + text + '", "date": "' + currentDate + '"}';
 
 
 	if(uid !== undefined && pid !== undefined) {
