@@ -29,7 +29,7 @@ block content
 						td=result.bedrooms
 						td=result.is_available
 						td 
-							button.btn.btn-secondary EDIT 
+							button.btn.btn-secondary(type='submit', onclick='editProperty("#{result.pid}")') EDIT 
 						td 
 							button.btn.btn-secondary(type='submit', onclick='setUnavail("#{result.pid}")') REMOVE
 							
@@ -74,4 +74,8 @@ block content
 				});
 				location.reload();
 			}
+		};
+		
+		function editProperty(pid){
+			window.location.href = "/editProperty/" + String(pid);
 		};

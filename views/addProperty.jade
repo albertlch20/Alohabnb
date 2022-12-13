@@ -1,83 +1,83 @@
 extends layout2
 
 block content
-	div.p-5
-		h1 Register Your Property
-		br
-		p#showRes.hidden Success
-		form(id='form1', action='/properties', method='post')
-			div.form-group
-				label(for='title') Title
-				input#title.form-control(name='title' type='text' placeholder='Title')
-			div.form-group
-				label(for='location') Location
-				input#location.form-control(name='location' type='text' placeholder='Austin, Texas, United States')
-			div.form-group
-				label(for='description') Description
-				input#description.form-control(name='description' type='text' placeholder='Big vacation house for family')
-			dev.form-row
-				div.form-group.col-md-6
-					label(for='nightly_fee') Nightly Fee
-					input#nightly_fee.form-control(name='nightly_fee' type='text' placeholder='Nightly Fee')
-				div.form-group.col-md-6
-					label(for='cleaning_fee') Cleaning Fee
-					input#cleaning_fee.form-control(name='cleaning_fee' type='text' placeholder='Cleaning Fee')
-				div.form-group.col-md-6
-					label(for='service_fee') Service Fee
-					input#service_fee.form-control(name='service_fee' type='text' placeholder='Service Fee')
-			div.form-group
-				label(for='amenities') Amenities
-				input#amenities.form-control(name='amenities' type='text' placeholder='Use comma to seperate, e.g., TV, Free parking, AC')
-			div.form-group
-				label(for='bedrooms') Number of bedrooms
-				input#bedrooms.form-control(name='bedrooms' type='text' placeholder='Number of bedrooms')
-				br
-			div.form-group
-				div.input-group.mb-3
-					div.input-group-prepend
-						label.input-group-text(for='type') Property Type
-					select#type.custom-select(name='type')
-						option(selected='' value='House') Choose...
-						option(value='House') House
-						option(value='Apartment') Apartment
-						option(value='Townhouse') Townhouse		
-			br
-			div.form-group
-				input#pond.filepond(type='file' name='filepond' multiple data-allow-reorder='true' data-max-file-size='3MB' data-max-files='3')
-			input#uid.form-control(type='hidden' name='uid' )
-			br
-			button.btn.btn-secondary(type='submit', form='form1', value='Submit') Submit
-			
-			script(src="https://unpkg.com/filepond@^4/dist/filepond.js")
-			script.
-				const user = JSON.parse(localStorage.getItem('user'));
-				if(user) {
-					var uid = document.getElementById("uid");
-					uid.value = user.uid;
-				}
-				
-				/*FilePond.registerPlugin(
-					FilePondPluginImagePreview,
-					FilePondPluginImageExifOrientation,
-					FilePondPluginFileValidateSize,
-					FilePondPluginImageEdit
-				);*/
-				
-				FilePond.setOptions({
-					server: '/upload',
-					allowFileTypeValidation: false,
-					acceptedFileTypes: "image/jpg",
-					allowImageCrop: true,
-					allowImageExifOrientation: true
-				});
-				
-				FilePond.create(
-				  document.getElementById('pond')
-				);
-				
-				var showRes = document.getElementById("showRes");
-				
-				if('#{results}' !== undefined) {
-					showRes.textContent='#{results}';
-					showRes.classList.remove('hidden');
-				}
+    div.p-5
+        h1 Register Your Property
+        br
+        p#showRes.hidden Success
+        form(id='form1', action='/properties', method='post')
+            div.form-group
+                label(for='title') Title
+                input#title.form-control(name='title' type='text' placeholder='Title')
+            div.form-group
+                label(for='location') Location
+                input#location.form-control(name='location' type='text' placeholder='Austin, Texas, United States')
+            div.form-group
+                label(for='description') Description
+                input#description.form-control(name='description' type='text' placeholder='Big vacation house for family')
+            dev.form-row
+                div.form-group.col-md-6
+                    label(for='nightly_fee') Nightly Fee
+                    input#nightly_fee.form-control(name='nightly_fee' type='text' placeholder='Nightly Fee')
+                div.form-group.col-md-6
+                    label(for='cleaning_fee') Cleaning Fee
+                    input#cleaning_fee.form-control(name='cleaning_fee' type='text' placeholder='Cleaning Fee')
+                div.form-group.col-md-6
+                    label(for='service_fee') Service Fee
+                    input#service_fee.form-control(name='service_fee' type='text' placeholder='Service Fee')
+            div.form-group
+                label(for='amenities') Amenities
+                input#amenities.form-control(name='amenities' type='text' placeholder='Use comma to seperate, e.g., TV, Free parking, AC')
+            div.form-group
+                label(for='bedrooms') Number of bedrooms
+                input#bedrooms.form-control(name='bedrooms' type='text' placeholder='Number of bedrooms')
+                br
+            div.form-group
+                div.input-group.mb-3
+                    div.input-group-prepend
+                        label.input-group-text(for='type') Property Type
+                    select#type.custom-select(name='type')
+                        option(selected='' value='House') Choose...
+                        option(value='House') House
+                        option(value='Apartment') Apartment
+                        option(value='Townhouse') Townhouse     
+            br
+            div.form-group
+                input#pond.filepond(type='file' name='filepond' multiple data-allow-reorder='true' data-max-file-size='3MB' data-max-files='3')
+            input#uid.form-control(type='hidden' name='uid' )
+            br
+            button.btn.btn-secondary(type='submit', form='form1', value='Submit') Submit
+            
+            script(src="https://unpkg.com/filepond@^4/dist/filepond.js")
+            script.
+                const user = JSON.parse(localStorage.getItem('user'));
+                if(user) {
+                    var uid = document.getElementById("uid");
+                    uid.value = user.uid;
+                }
+                
+                /*FilePond.registerPlugin(
+                    FilePondPluginImagePreview,
+                    FilePondPluginImageExifOrientation,
+                    FilePondPluginFileValidateSize,
+                    FilePondPluginImageEdit
+                );*/
+                
+                FilePond.setOptions({
+                    server: '/upload',
+                    allowFileTypeValidation: false,
+                    acceptedFileTypes: "image/jpg",
+                    allowImageCrop: true,
+                    allowImageExifOrientation: true
+                });
+                
+                FilePond.create(
+                  document.getElementById('pond')
+                );
+                
+                var showRes = document.getElementById("showRes");
+                
+                if('#{results}' !== undefined) {
+                    showRes.textContent='#{results}';
+                    showRes.classList.remove('hidden');
+                }

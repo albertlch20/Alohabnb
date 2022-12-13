@@ -145,6 +145,17 @@ router.get('/details/:pid', function(req, res) {
 	});
 });
 
+router.get('/editProperty/:pid', function(req, res) {
+	var pid = req.params.pid;
+	var collection = db.get('properties');
+	const results_from_mongo = [];
+
+	collection.findOne({ pid: Number(pid) }, function(err, property){
+		if (err) throw err;
+		res.render('editProperty', property);
+	});
+});
+
 router.get('/favourites/:uid', function(req, res) {
 	var uid = req.params.uid;
 	var collection = db.get('users');
